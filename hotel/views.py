@@ -127,11 +127,14 @@ def admin_add_room(request):
                 list_table.append(i[0])
 
             for i in list_table:
-                conn=sqlite3.connect("rooms.sqlite3")
-                sql='INSERT INTO {} (room_no) VALUES(?)'.format(i)
-                conn.execute(sql,(room_number,))
-                conn.commit()
-                conn.close()
+                try:
+                    conn=sqlite3.connect("rooms.sqlite3")
+                    sql='INSERT INTO {} (room_no) VALUES(?)'.format(i)
+                    conn.execute(sql,(room_number,))
+                    conn.commit()
+                    conn.close()
+                except:
+                    print(i)
 
         
 
